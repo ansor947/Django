@@ -3,6 +3,6 @@ from calculator.views import counter
 
 urlpatterns = [
     
-    path('counter/', counter, name = 'counter'),
+    path('counter/<str:dishs>/<int:quantitys>/', counter, name = 'counter'),
     
 ]

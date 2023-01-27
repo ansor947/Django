@@ -7,9 +7,12 @@
 <body>
 <ul>
 {% for dish, recipe in recipes_list %}
+
+{% if {{dishs}} in {{dish}} and {{dishs}} == {{dish}}} %}
+
 {% for ingredient, amount in {{recipe.items}} %}
-{% if {{dish}} in dish and {{dish}} == dish %}
-    <li>{{ ingredient }}: ({{ amount}} * {{quantity}})</li>
+
+    <li>{{ ingredient }}: ({{ amount}} * {{quantitys}})</li>
 
 {% empty %}
     <p>Такого рецепта не знаю :(</p>

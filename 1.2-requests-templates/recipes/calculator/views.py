@@ -20,11 +20,11 @@ DATA = {
 } 
 
 def counter(request, dishs, quantitys):
-    quantity = int(request.GET.get("quantity", 1))
-    dish = request.GET.get("quantity", 1)
+    # dish = request.GET.get("dish")
+    # quantity = request.GET.get("quantity", 1)
     context = {
         'recipes_list':DATA,
-        'quantity':quantity,
-        'dish':dish
+        'quantitys':quantitys,
+        'dishs':dishs
               }
     return render(request, 'index.html', context)
