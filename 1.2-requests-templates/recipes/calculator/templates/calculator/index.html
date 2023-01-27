@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Рецепты</title>
+</head>
+<body>
+<ul>
+{% for dish, recipe in recipes_list %}
+{% for ingredient, amount in {{recipe.items}} %}
+{% if {{dish}} in dish and {{dish}} == dish %}
+    <li>{{ ingredient }}: ({{ amount}} * {{quantity}})</li>
+
+{% empty %}
+    <p>Такого рецепта не знаю :(</p>
+{% endif %}
+{% endfor %}
+</ul>
+</body>
+</html>
