@@ -5,19 +5,10 @@
     <title>Рецепты</title>
 </head>
 <body>
-<ul>
-{% for dish, recipe in recipes_list %}
-
-{% if {{dishs}} in {{dish}} and {{dishs}} == {{dish}}} %}
-
-{% for ingredient, amount in {{recipe.items}} %}
-
-    <li>{{ ingredient }}: ({{ amount}} * {{quantitys}})</li>
-
+{% for ingredient, amount in recipe.items %}
+    <p>{{ ingredient }}: {{ amount }}</p>
 {% empty %}
     <p>Такого рецепта не знаю :(</p>
-{% endif %}
 {% endfor %}
-</ul>
 </body>
 </html>

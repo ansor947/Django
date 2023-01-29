@@ -1,8 +1,10 @@
 from django.urls import path
-from calculator.views import counter
+from calculator.views import omlet, pasta, buter
 
 urlpatterns = [
-    
-    path('counter/<str:dishs>/<int:quantitys>/', counter, name = 'counter'),
+ 
+    path('omlet/', omlet, name = 'omlet'),
+    path('pasta/', pasta, name = 'pasta'),
+    path('buter/', buter, name = 'buter'),
     
 ]

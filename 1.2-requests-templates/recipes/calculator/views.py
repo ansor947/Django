@@ -19,12 +19,39 @@ DATA = {
     },
 } 
 
-def counter(request, dishs, quantitys):
-    # dish = request.GET.get("dish")
-    # quantity = request.GET.get("quantity", 1)
+
+def omlet(request):
+    servings = int(request.GET.get("servings", 1))
     context = {
-        'recipes_list':DATA,
-        'quantitys':quantitys,
-        'dishs':dishs
+                'recipe': 
+                        {
+                        'яйца, шт': 2 * servings,
+                        'молоко, л': 0.1 * servings,
+                        'соль, ч.л.': 0.5 * servings,
+                        },
+              }
+    return render(request, 'index.html', context)
+
+def pasta(request):
+    servings = int(request.GET.get("servings", 1))
+    context = {
+                'recipe':
+                        {
+                        'макароны, г': 0.3 * servings,
+                        'сыр, г': 0.05 * servings,
+                        },
+                }
+    return render(request, 'index.html', context)
+
+def buter(request):
+    servings = int(request.GET.get("servings", 1))
+    context = {
+                'recipe':
+                        {
+                        'хлеб, ломтик': 1 * servings,
+                        'колбаса, ломтик': 1 * servings,
+                        'сыр, ломтик': 1 * servings,
+                        'помидор, ломтик': 1 * servings,
+                        },
               }
     return render(request, 'index.html', context)
