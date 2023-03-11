@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from stocks_products.logistic.models import Product, Stock
+from stocks_products.logistic.models import Product, Stock, StockProduct
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -14,8 +14,8 @@ class ProductPositionSerializer(serializers.ModelSerializer):
     products = ProductSerializer(read_only=True, many=True)
 
     class Meta:
-        model = Stock
-        fields = ['id', 'address', 'products']
+        model = StockProduct
+        fields = ['id', 'stock', 'product', 'quantity', 'price']
 
 
 class StockSerializer(serializers.ModelSerializer):
@@ -25,19 +25,25 @@ class StockSerializer(serializers.ModelSerializer):
         model = Stock
         fields = ['id', 'address', 'products', 'positions']
 
-    # def create(self, validated_data):
-    #     positions = validated_data.pop('positions')
-    #     stock = super().create(validated_data)
-    #     return stock
-
-    # def update(self, instance, validated_data):
-    #     positions = validated_data.pop('positions')
-    #     stock = super().update(instance, validated_data)
-    #     return stock
-    
-    def update_or_create(self, validated_data):
+    def create(self, validated_data):
         positions = validated_data.pop('positions')
-        address = validated_data.pop('address')
-        values_for_update={"address": address, "positions": positions}
-        id,stock = Stock.objects.update_or_create(id=1, defaults = values_for_update)
+        stock = super().create(validated_data)
+        for position in positions:
+            StockProduct.objects.create(
+                stock=stock,
+                product=position['product'], 
+                quantity=position['quantity'],
+                price=position['price'] 
+            ).save()
+        return stock
+
+    def update(self, instance, validated_data):
+        positions = validated_data.pop('positions')
+        stock = super().update(instance, validated_data)
+        for position in positions:
+            obj, created = StockProduct.objects.update_or_create(
+                stock=stock,
+                product=position['product'],
+                quantity = position['quantity'],
+                price = position['price'])
         return stock

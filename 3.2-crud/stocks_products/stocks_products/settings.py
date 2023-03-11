@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 
     'logistic',
 
-    'django-filters',
+    'djangofilters',
 ]
 
 MIDDLEWARE = [
