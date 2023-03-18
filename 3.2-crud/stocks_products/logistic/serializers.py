@@ -15,7 +15,7 @@ class ProductPositionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = StockProduct
-        fields = ['id', 'stock', 'product', 'quantity', 'price']
+        fields = ['id', 'product', 'quantity', 'price']
 
 
 class StockSerializer(serializers.ModelSerializer):
@@ -44,6 +44,5 @@ class StockSerializer(serializers.ModelSerializer):
             obj, created = StockProduct.objects.update_or_create(
                 stock=stock,
                 product=position['product'],
-                quantity = position['quantity'],
-                price = position['price'])
+                defaults={'quantity': position['quantity'], 'price': position['price']})
         return stock
